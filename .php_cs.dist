@@ -1,0 +1,16 @@
+<?php
+
+// Reference: http://cs.sensiolabs.org/
+
+return PhpCsFixer\Config::create()
+    ->setUsingCache(false)
+    ->setRiskyAllowed(true)
+    ->setRules([
+        'array_syntax' => ['syntax' => 'short'],
+        'increment_style' => ['style' => 'post'],
+        'no_multiline_whitespace_before_semicolons' => true,
+        'ordered_imports' => ['sortAlgorithm' => 'length'],
+        'semicolon_after_instruction' => false,
+        'strict_comparison' => true,
+        'yoda_style' => false,
+    ]);
