@@ -3,5 +3,6 @@
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "all",
-  "htmlWhitespaceSensitivity": "css"
+  "htmlWhitespaceSensitivity": "css",
+  "printWidth": 140
 }
