@@ -1,13 +1,9 @@
 <?php
 
-// Reference: http://cs.sensiolabs.org/
-
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setUsingCache(false)
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PHP70Migration' => true,
-        '@PHP71Migration' => true,
         '@PSR2' => true,
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
