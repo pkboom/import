@@ -13,4 +13,5 @@ return (new PhpCsFixer\Config())
         'yoda_style' => false,
         'phpdoc_separation' => false,
         'no_superfluous_phpdoc_tags' => false,
+        'php_unit_method_casing' => ['case' => 'snake_case'],
     ]);
