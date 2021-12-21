@@ -1,6 +1,6 @@
 <?php
 
-echo 'This will create a `autoload/files` in `composer.json`'.PHP_EOL;
+echo PHP_EOL.'This will create a `autoload/files` in `composer.json`'.PHP_EOL;
 echo 'Make sure you are in a project. Ready?'.PHP_EOL;
 
 $f = fopen('php://stdin', 'r');
