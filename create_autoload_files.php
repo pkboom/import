@@ -1,5 +1,3 @@
-#!/usr/bin/php
-
 <?php
 
 echo 'This will create a `autoload/files` in `composer.json`'.PHP_EOL;
