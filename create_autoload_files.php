@@ -1,7 +1,5 @@
 <?php
 
-exit(1);
-
 echo 'This will create a `autoload/files` in `composer.json`'.PHP_EOL;
 echo 'Make sure you are in a project. Ready?'.PHP_EOL;
 
@@ -18,7 +16,7 @@ $file = "$root/composer.json";
 if (!file_exists($file)) {
     echo 'composer.json doesn\'t exist.'.PHP_EOL;
 
-    return;
+    exit(1);
 }
 
 $composer = json_decode(file_get_contents($file), true);
@@ -26,7 +24,7 @@ $composer = json_decode(file_get_contents($file), true);
 if (array_key_exists('files', $composer['autoload'])) {
     echo '`files` exists.'.PHP_EOL;
 
-    return;
+    exit(1);
 }
 
 $composer['autoload']['files'] = [
