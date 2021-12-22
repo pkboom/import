@@ -1,5 +1,7 @@
 <?php
 
+exit(1);
+
 echo 'This will create a `autoload/files` in `composer.json`'.PHP_EOL;
 echo 'Make sure you are in a project. Ready?'.PHP_EOL;
 
