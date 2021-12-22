@@ -29,7 +29,7 @@ if (array_key_exists('files', $composer['autoload'])) {
 
 $helpers = "$root/app/helpers.php";
 
-if (!file_exists($helpers)) {
+if (file_exists($helpers)) {
     echo 'helpers.php exists.'.PHP_EOL;
 
     exit(1);
