@@ -11,18 +11,26 @@ fclose($f);
 
 $root = getcwd();
 
-$file = "$root/composer.json";
+$path = "$root/composer.json";
 
-if (!file_exists($file)) {
+if (!file_exists($path)) {
     echo 'composer.json doesn\'t exist.'.PHP_EOL;
 
     exit(1);
 }
 
-$composer = json_decode(file_get_contents($file), true);
+$composer = json_decode(file_get_contents($path), true);
 
 if (array_key_exists('files', $composer['autoload'])) {
-    echo '`files` exists.'.PHP_EOL;
+    echo '`files in composer.json` exists.'.PHP_EOL;
+
+    exit(1);
+}
+
+$helpers = "$root/app/helpers.php";
+
+if (!file_exists($helpers)) {
+    echo 'helpers.php exists.'.PHP_EOL;
 
     exit(1);
 }
