@@ -39,4 +39,4 @@ $composer['autoload']['files'] = [
     'app/helpers.php',
 ];
 
-file_put_contents($file, json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+file_put_contents($path, json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
