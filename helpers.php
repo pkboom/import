@@ -6,9 +6,9 @@ function dv($arg)
 
     $lines = file($backtrace[0]['file']);
 
-    $dv = $lines[$backtrace[0]['line'] - 1];
+    $line = $lines[$backtrace[0]['line'] - 1];
 
-    preg_match('/\sdv\(([^)]+)\)/', $dv, $match);
+    preg_match('/\sdv\(([^)]+)\)/', $line, $match);
 
     dump("{$match[1]}: $arg");
 }
