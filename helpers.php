@@ -10,5 +10,5 @@ function dv($arg)
 
     preg_match('/\sdv\(([^)]+)\)/', $line, $match);
 
-    dump("{$match[1]}:", $arg);
+    dump("{$match[1]}", $arg);
 }
