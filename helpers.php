@@ -12,3 +12,11 @@ function dv($arg)
 
     dump("{$match[1]}", $arg);
 }
+
+
+function ddv($arg)
+{
+    dv($arg);
+
+    exit(1);
+}
