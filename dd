@@ -2,16 +2,16 @@ Detach.(Ctrl+k o)
 
 
 
-dd(      );
+dd($      );
 
 
 
-dump(      );
+dump($      );
 
 
 
-dv(      );
+dv($      );
 
 
 
-dvd(     );
+dvd($     );
