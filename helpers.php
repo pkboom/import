@@ -1,22 +1,7 @@
 <?php
 
-function dv($arg)
-{
-    $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+use Illuminate\Support\Str;
 
-    $lines = file($backtrace[0]['file']);
-
-    $line = $lines[$backtrace[0]['line'] - 1];
-
-    preg_match('/\sdv\(([^)]+)\)/', $line, $match);
-
-    dump("{$match[1]}", $arg);
-}
-
-
-function ddv($arg)
-{
-    dv($arg);
-
-    exit(1);
-}
+Str::macro('swap', function ($map, $subject) {
+    return str_replace(array_keys($map), array_values($map), $subject);
+});
