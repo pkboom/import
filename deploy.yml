@@ -1,0 +1,87 @@
+name: Test & Deploy
+
+on:
+  push:
+    brances:
+      - master
+
+jobs:
+  run-tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    env:
+      php: 8.2
+      # repository: 'spatie/freek.dev'
+      # host: 'freek.dev'
+      # username: 'forge'
+      # baseDir: '/home/forge/freek-test.dev'
+      # newReleaseName: '${{ github.run_id }}'
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache npm dependencies
+        id: cache-node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Dependencies
+        if: steps.cache-node_modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+
+      - name: Cache composer dependencies
+        id: cache-vendor
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: composer-${{ env.php }}-${{ hashFiles('composer.lock') }}
+
+      - name: Install Dependencies
+        if: steps.cache-vendor.outputs.cache-hit != 'true'
+        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+      - name: Install dependencies
+        if: steps.cache-vendor.outputs.cache-hit != 'true'
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Run tests
+        run: ./vendor/bin/phpunit
+        env:
+          DB_PASSWORD: root
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Run PHP CS Fixer
+        uses: docker://oskarstark/php-cs-fixer-ga
+        with:
+          args: --config=.php-cs-fixer.dist.php --allow-risky=yes
