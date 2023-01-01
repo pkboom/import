@@ -37,9 +37,12 @@ jobs:
           path: node_modules
           key: npm-${{ hashFiles('package-lock.json') }}
 
-      - name: Install Dependencies
+      - name: Install front-end dependencies
         if: steps.cache-node_modules.outputs.cache-hit != 'true'
         run: npm ci
+
+      - name: Compilte front-end
+        run: npm run build
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -57,7 +60,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.cache-vendor.outputs.cache-hit != 'true'
-        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-scripts
 
       - name: Install dependencies
         if: steps.cache-vendor.outputs.cache-hit != 'true'
@@ -70,18 +73,44 @@ jobs:
       - name: Run tests
         run: ./vendor/bin/phpunit
         env:
-          DB_PASSWORD: root
+          DB_DATABASE: test
+          DB_USER: root
+          DB_PASSWORD: password
 
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
+      - uses: actions/checkout@v2
 
-      - name: Run PHP CS Fixer
-        uses: docker://oskarstark/php-cs-fixer-ga
+      - name: Deploy
+        env:
+          repository: pkboom/experiment
+          host: 68.183.192.245
+          # host: 'experiment.com'
+          username: admin
+          baseDir: /var/www/experiment.com
+        uses: appleboy/ssh-action@master
         with:
-          args: --config=.php-cs-fixer.dist.php --allow-risky=yes
+          host: ${{ env.host }}
+          username: ${{ env.username }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd ${{ env.baseDir }}
+            echo 'git pull'
+            git pull --depth=1
+            echo 'composer'
+            composer update --prefer-dist --no-interaction --no-scripts;
+            echo 'generate assets'
+            npm ci
+            npm run build
+            rm -rf node_modules
+            php artisan clear-compiled
+            echo 'migrate'
+            php artisan migrate --force
+            echo 'cache'
+            php artisan config:clear
+            php artisan view:clear
+            php artisan cache:clear
+            php artisan config:cache
+            sudo service php8.2-fpm restart
