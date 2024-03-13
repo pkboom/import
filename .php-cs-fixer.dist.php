@@ -30,6 +30,7 @@ return (new PhpCsFixer\Config())
             'tokens' => [
                 'extra',
                 'curly_brace_block',
+                'square_brace_block',
             ],
         ],
         'no_singleline_whitespace_before_semicolons' => true,
