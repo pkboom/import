@@ -37,4 +37,5 @@ return (new PhpCsFixer\Config())
         'concat_space' => true,
         'no_whitespace_before_comma_in_array' => true,
         'array_indentation' => true,
+        'object_operator_without_whitespace' => true,
     ]);
