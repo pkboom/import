@@ -38,4 +38,5 @@ return (new PhpCsFixer\Config())
         'no_whitespace_before_comma_in_array' => true,
         'array_indentation' => true,
         'object_operator_without_whitespace' => true,
+        'method_chaining_indentation' => true,
     ]);
