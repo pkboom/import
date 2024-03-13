@@ -29,9 +29,11 @@ return (new PhpCsFixer\Config())
         'no_extra_blank_lines' => [
             'tokens' => [
                 'extra',
+                'curly_brace_block',
             ],
         ],
         'no_singleline_whitespace_before_semicolons' => true,
         'concat_space' => true,
         'no_whitespace_before_comma_in_array' => true,
+        'array_indentation' => true,
     ]);
