@@ -140,4 +140,5 @@ return (new PhpCsFixer\Config())
             'elements' => ['method', 'property'],
         ],
         'whitespace_after_comma_in_array' => true,
+        'no_unused_imports' => true,
     ]);
