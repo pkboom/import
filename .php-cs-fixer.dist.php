@@ -18,4 +18,8 @@ return (new Config())
         'ordered_class_elements' => [
             'order' => ['use_trait'],
         ],
+        'yoda_style' => [
+            'identical' => null,
+            'equal' => null,
+        ],
     ]);
