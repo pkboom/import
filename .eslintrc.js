@@ -1,15 +1,10 @@
 module.exports = {
-  env: {
-    amd: true,
-    browser: true,
-    es6: true,
-  },
-  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
+  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'prettier'],
   parserOptions: {
     sourceType: 'module',
   },
+  plugins: ['jest'],
   rules: {
-    indent: ['error', 2],
     quotes: ['warn', 'single'],
     semi: ['warn', 'never'],
     'comma-dangle': ['warn', 'always-multiline'],
