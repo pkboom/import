@@ -40,4 +40,7 @@ return (new Config())
         'method_chaining_indentation' => true,
         'object_operator_without_whitespace' => true,
         'trim_array_spaces' => true,
+        'whitespace_after_comma_in_array' => [
+            'ensure_single_space' => true,
+        ],
     ]);
