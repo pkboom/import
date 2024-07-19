@@ -39,4 +39,5 @@ return (new Config())
         'array_indentation' => true,
         'method_chaining_indentation' => true,
         'object_operator_without_whitespace' => true,
+        'trim_array_spaces' => true,
     ]);
