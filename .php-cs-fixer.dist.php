@@ -43,4 +43,5 @@ return (new Config())
         'whitespace_after_comma_in_array' => [
             'ensure_single_space' => true,
         ],
+        'single_line_empty_body' => true,
     ]);
