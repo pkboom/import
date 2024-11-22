@@ -43,5 +43,7 @@ return (new Config())
         'whitespace_after_comma_in_array' => [
             'ensure_single_space' => true,
         ],
+        'php_unit_method_casing' => ['case' => 'snake_case'],
         'single_line_empty_body' => true,
+        'single_space_around_construct' => true,
     ]);
