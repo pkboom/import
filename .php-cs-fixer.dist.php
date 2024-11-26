@@ -46,4 +46,5 @@ return (new Config())
         'php_unit_method_casing' => ['case' => 'snake_case'],
         'single_line_empty_body' => true,
         'single_space_around_construct' => true,
+        'no_trailing_comma_in_singleline' => true,
     ]);
