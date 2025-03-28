@@ -1,6 +1,13 @@
 <?php
 
 use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$finder = Finder::create()
+    ->in(__DIR__)
+    ->exclude(['bootstrap', 'storage', 'database', 'resources', 'public'])
+    ->notName('*.blade.php')
+    ->ignoreDotFiles(true);
 
 return (new Config())
     ->setRules([
@@ -47,4 +54,8 @@ return (new Config())
         'single_line_empty_body' => true,
         'single_space_around_construct' => true,
         'no_trailing_comma_in_singleline' => true,
-    ]);
+        'fully_qualified_strict_types' => [
+            'import_symbols' => true,
+        ],
+    ])
+    ->setFinder($finder);
