@@ -54,8 +54,8 @@ return (new Config())
         'single_line_empty_body' => true,
         'single_space_around_construct' => true,
         'no_trailing_comma_in_singleline' => true,
-        'fully_qualified_strict_types' => [
-            'import_symbols' => true,
+        'operator_linebreak' => [
+            'only_booleans' => true,
+            'position' => 'end',
         ],
-    ])
-    ->setFinder($finder);
+    ])->setFinder($finder);
